@@ -1,62 +1,141 @@
-# Express.js RESTful API Assignment
+# Week 2 Assignment - Express.js RESTful API
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+## 🚀 Objective
+Build a RESTful API using Express.js that implements CRUD operations, middleware (logging, authentication, validation), error handling, and advanced features like filtering, pagination, search, and product statistics.
 
-## Assignment Overview
+---
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+## 📂 Project Structure
+├── server.js # Main server file
+├── package.json # Node.js project file
+├── package-lock.json # Auto-generated dependency lock file
+├── README.md # Project documentation
+└── .env.example # Example environment variables
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
+## 🛠️ Setup Instructions
 
-## Files Included
+1. **Clone your GitHub repository**:
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+2. Install dependencies:
+npm install
+3. Start the server:
+node server.js
+4. Server will run at:
+http://localhost:3000
+🔑 Environment Variables
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+Create a .env file based on .env.example:
+PORT=3000
+API_KEY=mysecretkey
+📌 API Endpoints
+Root
 
-## Requirements
+GET /
+Returns a welcome message.
+Products
+Get All Products
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+GET /api/products
 
-## API Endpoints
+Optional query parameters:
 
-The API will have the following endpoints:
+category → filter by category
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+page → page number for pagination
 
-## Submission
+limit → number of items per page
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+Get Product by ID
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+GET /api/products/:id
 
-## Resources
+Create New Product
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+POST /api/products
+
+Requires Header: Products
+Get All Products
+
+GET /api/products
+
+Optional query parameters:
+
+category → filter by category
+
+page → page number for pagination
+
+limit → number of items per page
+
+Get Product by ID
+
+GET /api/products/:id
+
+Create New Product
+
+POST /api/products
+
+Requires Header: 
+x-api-key: mysecretkey
+Body (JSON):
+{
+  "name": "Product Name",
+  "description": "Product Description",
+  "price": 100,
+  "category": "electronics",
+  "inStock": true
+}
+Update Product
+
+PUT /api/products/:id
+
+Requires Header:
+x-api-key: mysecretkey
+Body (JSON) same as above
+Delete Product
+
+DELETE /api/products/:id
+
+Requires Header:
+x-api-key: mysecretkey
+Search Products
+
+GET /api/search?name=keyword
+
+Search products by name (case-insensitive).
+Product Statistics
+
+GET /api/stats
+
+Returns count of products by category.
+⚙️ Middleware
+
+Logger → Logs method, URL, and timestamp for each request.
+
+Authentication → Protects POST, PUT, DELETE routes using x-api-key.
+
+Validation → Ensures proper product data on creation or update.
+
+Global Error Handling → Returns errors with status code and message.
+🧪 Testing the API
+
+You can use Postman. Examples:
+Get all products:
+GET http://localhost:3000/api/products
+Create product:
+POST http://localhost:3000/api/products
+Headers:
+x-api-key: mysecretkey
+Content-Type: application/json
+
+Body:
+{
+  "name": "Blender",
+  "description": "High-speed kitchen blender",
+  "price": 150,
+  "category": "kitchen",
+  "inStock": true
+}
